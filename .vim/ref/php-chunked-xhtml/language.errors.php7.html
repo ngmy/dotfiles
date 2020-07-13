@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>PHP 7 でのエラー</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="language.errors.basics.html">基本</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.exceptions.html">例外(exceptions)</a></div>
+ <div class="up"><a href="language.errors.html">エラー</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="language.errors.php7" class="sect1">
+ <h2 class="title">PHP 7 でのエラー</h2>
+
+ <p class="para">
+  PHP 7 は大半のエラーがどのようにPHPから報告されるかを変更しています。
+  PHP 5 で使われていたこれまでのエラー報告メカニズムを使うかわりに、
+  大半のエラーを <a href="class.error.html" class="classname">Error</a> 例外としてスローするようになったのです。
+ </p>
+
+ <p class="para">
+  通常の例外と同様、<a href="class.error.html" class="classname">Error</a> 例外も、
+  最初にマッチした
+  <a href="language.exceptions.html#language.exceptions.catch" class="link"><em>catch</em></a>
+  ブロックで現れます。
+  マッチするブロックがなければ、<span class="function"><a href="function.set-exception-handler.html" class="function">set_exception_handler()</a></span>
+  で設定したデフォルトの例外ハンドラが呼ばれます。
+  デフォルトの例外ハンドラもない場合は、例外が fatal error に変換されて、
+  これまでのバージョンのエラーと同じように扱われます。
+ </p>
+
+ <p class="para">
+  <a href="class.error.html" class="classname">Error</a> クラスは
+  <a href="class.exception.html" class="classname">Exception</a> を継承していないので、
+  キャッチし損ねた例外を
+  <code class="code">catch (Exception $e) { ... }</code>
+  ブロックで受け止めているような PHP 5 のコードでは、
+  <a href="class.error.html" class="classname">Error</a> をキャッチできません。
+  <code class="code">catch (Error $e) { ... }</code> ブロックを用意するか、あるいは
+  <span class="function"><a href="function.set-exception-handler.html" class="function">set_exception_handler()</a></span> でハンドラを設定する必要があります。
+ </p>
+
+ <div class="sect2" id="language.errors.php7.hierarchy">
+  <h3 class="title"><a href="class.error.html" class="classname">Error</a> の階層</h3>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara"><a href="class.throwable.html" class="classname">Throwable</a></span>
+    <ul class="itemizedlist">
+     <li class="listitem">
+      <span class="simpara"><a href="class.error.html" class="classname">Error</a></span>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <span class="simpara"><a href="class.arithmeticerror.html" class="classname">ArithmeticError</a></span>
+        <ul class="itemizedlist">
+         <li class="listitem">
+          <span class="simpara"><a href="class.divisionbyzeroerror.html" class="classname">DivisionByZeroError</a></span>
+         </li>
+        </ul>
+       </li>
+       <li class="listitem">
+        <span class="simpara"><a href="class.assertionerror.html" class="classname">AssertionError</a></span>
+       </li>
+       <li class="listitem">
+        <span class="simpara"><a href="class.parseerror.html" class="classname">ParseError</a></span>
+       </li>
+       <li class="listitem">
+        <span class="simpara"><a href="class.typeerror.html" class="classname">TypeError</a></span>
+       </li>
+      </ul>
+     </li>
+     <li class="listitem">
+      <span class="simpara"><a href="class.exception.html" class="classname">Exception</a></span>
+      <ul class="itemizedlist">
+       <li class="listitem">
+        <span class="simpara">...</span>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </div>
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="language.errors.basics.html">基本</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="language.exceptions.html">例外(exceptions)</a></div>
+ <div class="up"><a href="language.errors.html">エラー</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

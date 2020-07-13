@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>HTTP レスポンスコードを取得または設定</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.headers-sent.html">headers_sent</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.inet-ntop.html">inet_ntop</a></div>
+ <div class="up"><a href="ref.network.html">ネットワーク 関数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="function.http-response-code" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">http_response_code</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.4.0, PHP 7)</p><p class="refpurpose"><span class="refname">http_response_code</span> &mdash; <span class="dc-title">HTTP レスポンスコードを取得または設定</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-function.http-response-code-description">
+  <h3 class="title">説明</h3>
+  <div class="methodsynopsis dc-description">
+   <span class="type"><a href="language.pseudo-types.html#language.types.mixed" class="type mixed">mixed</a></span> <span class="methodname"><strong>http_response_code</strong></span>
+    ([ <span class="methodparam"><span class="type">int</span> <code class="parameter">$response_code</code></span>
+  ] )</div>
+
+  <p class="para rdfs-comment">
+   HTTP レスポンスのステータスコードを取得したり設定したりします。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-function.http-response-code-parameters">
+  <h3 class="title">パラメータ</h3>
+  <p class="para">
+   <dl>
+
+    
+     <dt>
+<code class="parameter">response_code</code></dt>
+
+     <dd>
+
+      <p class="para">
+       オプションの <code class="parameter">response_code</code> は、レスポンスコードを設定します。
+      </p>
+     </dd>
+
+       
+   </dl>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-function.http-response-code-returnvalues">
+  <h3 class="title">返り値</h3>
+  <p class="para">
+   <code class="parameter">response_code</code> を指定した場合は、変更前に設定されていたステータスコードを返します。
+   <code class="parameter">response_code</code> を省略した場合は、現在のステータスコードを返します。
+   どちらの場合でも、Web サーバー環境におけるデフォルトのステータスコードは
+   <em>200</em> です。
+  </p>
+  <p class="para">
+   <code class="parameter">response_code</code> が省略されており、
+   かつ Web サーバー環境以外 (CLI アプリケーションなど) で実行した場合には、<strong><code>FALSE</code></strong> を返します。
+   <code class="parameter">response_code</code> を指定して、
+   かつ Web サーバー環境以外 (CLI アプリケーションなど) で実行した場合
+   (ただし、事前にレスポンスのステータスが設定されていない場合に限る) には、<strong><code>TRUE</code></strong> を返します。
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-function.http-response-code-examples">
+  <h3 class="title">例</h3>
+  <p class="para">
+   <div class="example" id="example-5047">
+    <p><strong>例1 Web サーバー環境における <span class="function"><strong>http_response_code()</strong></span> の使用例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">//&nbsp;現在のレスポンスコードを取得して、新しいコードを設定します<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">http_response_code</span><span style="color: #007700">(</span><span style="color: #0000BB">404</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">//&nbsp;新しいレスポンスコードを取得します<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">http_response_code</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>上の例の出力は以下となります。</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+int(200)
+int(404)
+</pre></div>
+    </div>
+   </div>
+   <div class="example" id="example-5048">
+    <p><strong>例2 CLI 環境における <span class="function"><strong>http_response_code()</strong></span> の使用例</strong></p>
+    <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /><br /></span><span style="color: #FF8000">//&nbsp;現在のデフォルトのレスポンスコードを取得します<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">http_response_code</span><span style="color: #007700">());<br /><br /></span><span style="color: #FF8000">//&nbsp;レスポンスコードを設定します<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">http_response_code</span><span style="color: #007700">(</span><span style="color: #0000BB">201</span><span style="color: #007700">));<br /><br /></span><span style="color: #FF8000">//&nbsp;新しいレスポンスコードを取得します<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">http_response_code</span><span style="color: #007700">());<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+    </div>
+
+    <div class="example-contents"><p>上の例の出力は以下となります。</p></div>
+    <div class="example-contents screen">
+<div class="cdata"><pre>
+bool(false)
+bool(true)
+int(201)
+</pre></div>
+    </div>
+   </div>
+  </p>
+ </div>
+
+ 
+ <div class="refsect1 seealso" id="refsect1-function.http-response-code-seealso">
+  <h3 class="title">参考</h3>
+  <p class="para">
+   <ul class="simplelist">
+    <li class="member"><span class="function"><a href="function.header.html" class="function" rel="rdfs-seeAlso">header()</a> - 生の HTTP ヘッダを送信する</span></li>
+    <li class="member"><span class="function"><a href="function.headers-list.html" class="function" rel="rdfs-seeAlso">headers_list()</a> - 送信した (もしくは送信される予定の) レスポンスヘッダの一覧を返す</span></li>
+   </ul>
+  </p>
+ </div>
+ 
+
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="function.headers-sent.html">headers_sent</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="function.inet-ntop.html">inet_ntop</a></div>
+ <div class="up"><a href="ref.network.html">ネットワーク 関数</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

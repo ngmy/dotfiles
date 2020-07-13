@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Throwable</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="iteratoraggregate.getiterator.html">IteratorAggregate::getIterator</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="throwable.getmessage.html">Throwable::getMessage</a></div>
+ <div class="up"><a href="reserved.interfaces.html">定義済みのインターフェイスとクラス</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="class.throwable" class="reference">
+
+ <h1 class="title">Throwable</h1>
+ 
+
+ <div class="partintro"><p class="verinfo">(PHP 7)</p>
+
+
+  <div class="section" id="throwable.intro">
+   <h2 class="title">導入</h2>
+   <p class="para">
+    <strong class="classname">Throwable</strong>
+    は、PHP 7 の <a href="language.exceptions.html" class="link"><em>throw</em></a> 文でスロー可能なあらゆるオブジェクトが実装する基底インターフェイスです。
+    <a href="class.error.html" class="classname">Error</a> や <a href="class.exception.html" class="classname">Exception</a>
+    も、これを実装しています。
+   </p>
+   <blockquote class="note"><p><strong class="note">注意</strong>: 
+    <p class="para">
+     PHP のクラスが <strong class="classname">Throwable</strong> インターフェイスを直接実装することはできません。
+     そのかわりに、<a href="class.exception.html" class="classname">Exception</a> を継承する必要があります。
+    </p>
+   </p></blockquote>
+  </div>
+
+
+  <div class="section" id="throwable.synopsis">
+   <h2 class="title">インターフェイス概要</h2>
+
+
+   <div class="classsynopsis">
+    <div class="ooclass"></div>
+
+
+    <div class="classsynopsisinfo">
+     <span class="ooclass">
+      <strong class="classname">Throwable</strong>
+     </span>
+     {</div>
+
+    
+    <div class="classsynopsisinfo classsynopsisinfo_comment">/* メソッド */</div>
+    <div class="methodsynopsis dc-description">
+   <span class="modifier">abstract</span> <span class="modifier">public</span> <span class="type">string</span> <span class="methodname"><a href="throwable.getmessage.html" class="methodname">getMessage</a></span>
+    ( <span class="methodparam">void</span>
+   )</div>
+<div class="methodsynopsis dc-description">
+   <span class="modifier">abstract</span> <span class="modifier">public</span> <span class="type">int</span> <span class="methodname"><a href="throwable.getcode.html" class="methodname">getCode</a></span>
+    ( <span class="methodparam">void</span>
+   )</div>
+<div class="methodsynopsis dc-description">
+   <span class="modifier">abstract</span> <span class="modifier">public</span> <span class="type">string</span> <span class="methodname"><a href="throwable.getfile.html" class="methodname">getFile</a></span>
+    ( <span class="methodparam">void</span>
+   )</div>
+<div class="methodsynopsis dc-description">
+   <span class="modifier">abstract</span> <span class="modifier">public</span> <span class="type">int</span> <span class="methodname"><a href="throwable.getline.html" class="methodname">getLine</a></span>
+    ( <span class="methodparam">void</span>
+   )</div>
+<div class="methodsynopsis dc-description">
+   <span class="modifier">abstract</span> <span class="modifier">public</span> <span class="type">array</span> <span class="methodname"><a href="throwable.gettrace.html" class="methodname">getTrace</a></span>
+    ( <span class="methodparam">void</span>
+   )</div>
+<div class="methodsynopsis dc-description">
+   <span class="modifier">abstract</span> <span class="modifier">public</span> <span class="type">string</span> <span class="methodname"><a href="throwable.gettraceasstring.html" class="methodname">getTraceAsString</a></span>
+    ( <span class="methodparam">void</span>
+   )</div>
+<div class="methodsynopsis dc-description">
+   <span class="modifier">abstract</span> <span class="modifier">public</span> <span class="type">Throwable</span> <span class="methodname"><a href="throwable.getprevious.html" class="methodname">getPrevious</a></span>
+    ( <span class="methodparam">void</span>
+   )</div>
+<div class="methodsynopsis dc-description">
+   <span class="modifier">abstract</span> <span class="modifier">public</span> <span class="type">string</span> <span class="methodname"><a href="throwable.tostring.html" class="methodname">__toString</a></span>
+    ( <span class="methodparam">void</span>
+   )</div>
+
+   }</div>
+
+
+  </div>
+
+
+ </div>
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+<h2>目次</h2><ul class="chunklist chunklist_reference"><li><a href="throwable.getmessage.html">Throwable::getMessage</a> — メッセージを取得する</li><li><a href="throwable.getcode.html">Throwable::getCode</a> — 例外コードを取得する</li><li><a href="throwable.getfile.html">Throwable::getFile</a> — 例外が発生したファイル名を取得する</li><li><a href="throwable.getline.html">Throwable::getLine</a> — オブジェクトのインスタンスが作られた行番号を取得する</li><li><a href="throwable.gettrace.html">Throwable::getTrace</a> — スタックトレースを取得する</li><li><a href="throwable.gettraceasstring.html">Throwable::getTraceAsString</a> — スタックトレースを文字列として取得する</li><li><a href="throwable.getprevious.html">Throwable::getPrevious</a> — ひとつ前の Throwable を返す</li><li><a href="throwable.tostring.html">Throwable::__toString</a> — スローされたオブジェクトの文字列表現を取得する</li></ul>
+</div>
+<hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="iteratoraggregate.getiterator.html">IteratorAggregate::getIterator</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="throwable.getmessage.html">Throwable::getMessage</a></div>
+ <div class="up"><a href="reserved.interfaces.html">定義済みのインターフェイスとクラス</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>

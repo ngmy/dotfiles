@@ -12,6 +12,9 @@
 # Vim history files
 .netrwhist
 
+# Vim plugins
+.vim/bundle
+
 # Emacs backup files
 *~
 *#

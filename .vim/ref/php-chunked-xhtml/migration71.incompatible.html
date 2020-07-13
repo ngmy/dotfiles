@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>下位互換性のない変更点</title>
+
+ </head>
+ <body><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="migration71.constants.html">新しいグローバル定数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="migration71.deprecated.html">PHP 7.1.x で推奨されなくなる機能</a></div>
+ <div class="up"><a href="migration71.html">PHP 7.0.x から PHP 7.1.x への移行</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div><hr /><div id="migration71.incompatible" class="sect1">
+ <h2 class="title">下位互換性のない変更点</h2>
+
+ <div class="sect2" id="migration71.incompatible.too-few-arguments-exception">
+  <h3 class="title">関数に渡す引数が少ない場合の挙動</h3>
+
+  <p class="para">
+   これまでのバージョンでは、ユーザー定義の関数に渡す引数が足りない場合は
+   warning が発生していました。PHP 7.1 以降では、warning ではなく
+   Error 例外が発生するようになります。
+   この変更はユーザー定義の関数に対してだけのもので、
+   内部関数には影響を及ぼしません。
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">function&nbsp;</span><span style="color: #0000BB">test</span><span style="color: #007700">(</span><span style="color: #0000BB">$param</span><span style="color: #007700">){}<br /></span><span style="color: #0000BB">test</span><span style="color: #007700">();</span>
+</span>
+</code></div>
+   </div>
+
+   <p class="para">上の例の出力は、
+たとえば以下のようになります。</p>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Fatal error: Uncaught ArgumentCountError: Too few arguments to function test(), 0 passed in %s on line %d and exactly 1 expected in %s:%d
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="sect2" id="migration71.incompatible.forbid-dynamic-calls-to-scope-introspection-functions">
+  <h3 class="title">スコープを調べる関数の動的呼び出しの禁止</h3>
+
+  <p class="para">
+   ある種の関数について、動的な呼び出し
+   (<em>$func()</em> や <em>array_map(&#039;extract&#039;, ...)</em> のような形式)
+   が使えなくなりました。対象になるのは、別のスコープを調べたり変更したり、
+   あいまいな挙動になってしまったりするような関数です。
+   この変更の影響を受ける関数は、以下のとおりです。
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.assert.html" class="function">assert()</a></span> - 最初の引数に文字列を渡した場合
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.compact.html" class="function">compact()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.extract.html" class="function">extract()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.func-get-args.html" class="function">func_get_args()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.func-get-arg.html" class="function">func_get_arg()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.func-num-args.html" class="function">func_num_args()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.get-defined-vars.html" class="function">get_defined_vars()</a></span>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.mb-parse-str.html" class="function">mb_parse_str()</a></span> - 引数が一つだけの場合
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <span class="function"><a href="function.parse-str.html" class="function">parse_str()</a></span> - 引数が一つだけの場合
+    </span>
+   </li>
+  </ul>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">(function&nbsp;()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$func&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'func_num_args'</span><span style="color: #007700">;<br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #0000BB">$func</span><span style="color: #007700">();<br />})();</span>
+</span>
+</code></div>
+   </div>
+
+   <p class="para">上の例の出力は以下となります。</p>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Warning: Cannot call func_num_args() dynamically in %s on line %d
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="sect2" id="migration71.incompatible.invalid-class-names">
+  <h3 class="title">クラス、インターフェイス、トレイトに使えない名前</h3>
+
+  <p class="para">
+   これらのキーワードが、クラスやインターフェイスやトレイトの名前として使えなくなりました。
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara"><span class="type"><span class="type void">void</span></span></span>
+   </li>
+   <li class="listitem">
+    <span class="simpara"><span class="type"><span class="type iterable">iterable</span></span></span>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration71.incompatible.numerical-strings-scientific-notation">
+  <h3 class="title">数値形式文字列の変換が科学記法に対応</h3>
+
+  <p class="para">
+   数値形式の文字列の演算や型変換が、科学記法に対応するようになりました。
+   <em>(int)</em> によるキャストや、
+   <span class="function"><a href="function.intval.html" class="function">intval()</a></span> (基数が10の場合)、
+   <span class="function"><a href="function.settype.html" class="function">settype()</a></span>、<span class="function"><a href="function.decbin.html" class="function">decbin()</a></span>、
+   <span class="function"><a href="function.decoct.html" class="function">decoct()</a></span>、<span class="function"><a href="function.dechex.html" class="function">dechex()</a></span> といった関数もその対象です。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration71.incompatible.fixes-to-mt_rand-algorithm">
+  <h3 class="title"><span class="function"><a href="function.mt-rand.html" class="function">mt_rand()</a></span> のアルゴリズムの修正</h3>
+
+  <p class="para">
+   <span class="function"><a href="function.mt-rand.html" class="function">mt_rand()</a></span> のデフォルトが、修正版のメルセンヌ・ツイスタ
+   アルゴリズムを使うようになりました。<span class="function"><a href="function.mt-srand.html" class="function">mt_srand()</a></span>
+   の結果に依存するコードを書いていた場合は、<span class="function"><a href="function.mt-srand.html" class="function">mt_srand()</a></span>
+   のオプションの第二引数に <strong><code>MT_RAND_PHP</code></strong>
+   を指定すると、これまでの挙動 (間違った実装) を維持できます。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration71.incompatible.rand-srand-aliases">
+  <h3 class="title">
+   <span class="function"><a href="function.rand.html" class="function">rand()</a></span> と <span class="function"><a href="function.srand.html" class="function">srand()</a></span> が、
+   それぞれ <span class="function"><a href="function.mt-rand.html" class="function">mt_rand()</a></span> と <span class="function"><a href="function.mt-srand.html" class="function">mt_srand()</a></span> のエイリアスとなる
+  </h3>
+
+  <p class="para">
+   <span class="function"><a href="function.rand.html" class="function">rand()</a></span> と <span class="function"><a href="function.srand.html" class="function">srand()</a></span> は、それぞれ
+   <span class="function"><a href="function.mt-rand.html" class="function">mt_rand()</a></span> と <span class="function"><a href="function.mt-srand.html" class="function">mt_srand()</a></span>
+   のエイリアスになりました。つまり、
+   <span class="function"><a href="function.rand.html" class="function">rand()</a></span>、<span class="function"><a href="function.shuffle.html" class="function">shuffle()</a></span>、
+   <span class="function"><a href="function.str-shuffle.html" class="function">str_shuffle()</a></span>、<span class="function"><a href="function.array-rand.html" class="function">array_rand()</a></span>
+   の出力がこれまでのバージョンとは変わるということです。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration71.incompatible.delete-control-character-in-identifiers">
+  <h3 class="title">ASCII 制御文字 delete は識別子として使えない</h3>
+
+  <p class="para">
+   ASCII 制御文字 delete (<em>0x7F</em>) は、
+   クォートしない限りは識別子として使えなくなりました。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration71.incompatible.error_log-syslog">
+  <h3 class="title">
+   <code class="parameter">error_log</code> に <em>syslog</em> を指定した場合の変更
+  </h3>
+
+  <p class="para">
+   INI 項目 <code class="parameter">error_log</code> の設定値を
+   <em>syslog</em> にした場合に、PHP のエラーレベルが syslog
+   のエラーレベルにマッピングされるようになりました。
+   これまでのバージョンではすべてのエラーが notice レベルで記録されていましたが、
+   この変更によって、今までよりも細やかな区別ができるようになります。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration71.incompatible.dont-call-destructors">
+  <h3 class="title">未完成のオブジェクトのデストラクタは呼び出されない</h3>
+
+  <p class="para">
+   オブジェクトのコンストラクタの実行中に例外がスローされた場合に、
+   そのオブジェクトのデストラクタが呼ばれることはなくなりました。
+   以前のバージョンでは、場合によっては
+   (例: そのオブジェクトが例外バックトレースなどで外部から参照される場合)
+   デストラクタが呼ばれることもありました。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration71.incompatible.call_user_func-with-ref-args">
+  <h3 class="title">
+   参照渡しの引数の <span class="function"><a href="function.call-user-func.html" class="function">call_user_func()</a></span> での扱い
+  </h3>
+
+  <p class="para">
+   引数を参照渡しで受け取る関数を <span class="function"><a href="function.call-user-func.html" class="function">call_user_func()</a></span>
+   から呼んだときに、例外が発生するようになりました。
+   以前のバージョンでは、完全修飾形式の呼び出しであるか否かによってこの場合の挙動が異なっていました。
+  </p>
+  <p class="para">
+   さらにこの場合、<span class="function"><a href="function.call-user-func.html" class="function">call_user_func()</a></span> や
+   <span class="function"><a href="function.call-user-func-array.html" class="function">call_user_func_array()</a></span> は関数呼び出しを中断しなくなりました。
+   &quot;expected reference&quot; という警告は出すものの、処理自体はそのまま続行します。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration71.incompatible.empty-string-index-operator">
+  <h3 class="title">
+   文字列における空のインデックス演算子はサポートしない
+  </h3>
+
+  <p class="para">
+   文字列に空のインデックス演算子を適用する (例: <em>$str[] = $x</em>)
+   と、fatal エラーが発生します。これまでのバージョンではエラーにならず、
+   ただ配列に変換されるだけでした。
+  </p>
+ </div>
+
+ <div class="sect2" id="migration71.incompatible.removed-ini-directives">
+  <h3 class="title">削除された INI 項目</h3>
+
+  <p class="para">
+   以下の INI 項目は、削除されました。
+  </p>
+
+  <ul class="itemizedlist">
+   <li class="listitem">
+    <span class="simpara">
+     <code class="parameter">session.entropy_file</code>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <code class="parameter">session.entropy_length</code>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <code class="parameter">session.hash_function</code>
+    </span>
+   </li>
+   <li class="listitem">
+    <span class="simpara">
+     <code class="parameter">session.hash_bits_per_character</code>
+    </span>
+   </li>
+  </ul>
+ </div>
+
+ <div class="sect2" id="migration70.incompatible.array-order">
+  <h3 class="title">
+   参照による代入で自動的に作られる配列の要素の並び順の変更
+  </h3>
+
+  <p class="para">
+   参照による代入で配列の要素が自動的に作られる場合に、その並び順が変更されました。
+  </p>
+
+  <div class="informalexample">
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$array&nbsp;</span><span style="color: #007700">=&nbsp;[];<br /></span><span style="color: #0000BB">$array</span><span style="color: #007700">[</span><span style="color: #DD0000">"a"</span><span style="color: #007700">]&nbsp;=&amp;&nbsp;</span><span style="color: #0000BB">$array</span><span style="color: #007700">[</span><span style="color: #DD0000">"b"</span><span style="color: #007700">];<br /></span><span style="color: #0000BB">$array</span><span style="color: #007700">[</span><span style="color: #DD0000">"b"</span><span style="color: #007700">]&nbsp;=&nbsp;</span><span style="color: #0000BB">1</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">var_dump</span><span style="color: #007700">(</span><span style="color: #0000BB">$array</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <p class="para">上の例の PHP 7.0 での出力は、このようになります。</p>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+array(2) {
+  [&quot;a&quot;]=&gt;
+  &amp;int(1)
+  [&quot;b&quot;]=&gt;
+  &amp;int(1)
+}
+</pre></div>
+   </div>
+   <p class="para">上の例の PHP 7.1 での出力は、このようになります。</p>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+array(2) {
+  [&quot;b&quot;]=&gt;
+  &amp;int(1)
+  [&quot;a&quot;]=&gt;
+  &amp;int(1)
+}
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+</div><hr /><div class="manualnavbar" style="text-align: center;">
+ <div class="prev" style="text-align: left; float: left;"><a href="migration71.constants.html">新しいグローバル定数</a></div>
+ <div class="next" style="text-align: right; float: right;"><a href="migration71.deprecated.html">PHP 7.1.x で推奨されなくなる機能</a></div>
+ <div class="up"><a href="migration71.html">PHP 7.0.x から PHP 7.1.x への移行</a></div>
+ <div class="home"><a href="index.html">PHP Manual</a></div>
+</div></body></html>
