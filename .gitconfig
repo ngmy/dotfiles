@@ -1,0 +1,18 @@
+[user]
+	name = Yuta Nagamiya
+	email = y.nagamiya@gmail.com
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+[init]
+	templatedir = ~/.git_template
+[alias]
+	tree = "log --graph --date=iso --pretty='[%ad]%C(auto) %h%d %Cgreen%an%Creset : %s'"
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[merge]
+	tool = vimdiff
+[mergetool]
+	prompt = false

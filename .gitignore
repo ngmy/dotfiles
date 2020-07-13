@@ -1,0 +1,30 @@
+# Mac OS metadata files
+.DS_Store
+
+# Log files
+*.log
+
+# Vim backup files
+*~
+*.swp
+*.swo
+
+# Vim history files
+.netrwhist
+
+# Emacs backup files
+*~
+*#
+.#*
+
+# Ctags tags files
+*.tags
+
+# output from nohup
+nohup.out
+
+# Laradock directories
+#laradock
+
+# Zephir directories
+.zephir
