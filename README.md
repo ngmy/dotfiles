@@ -1,2 +1,1 @@
-# dotfiles
-ngmy's dotfiles
+# ngmy's Dot Files
