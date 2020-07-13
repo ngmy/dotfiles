@@ -13,7 +13,8 @@
 .netrwhist
 
 # Vim plugins
-.vim/bundle
+.vim/bundle/*
+!.vim/bundle/Vundle.vim
 
 # Emacs backup files
 *~
