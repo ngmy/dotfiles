@@ -14,10 +14,13 @@ do_it() {
   BACKUP_DATE="$(date +%Y%m%d_%H%M%S)"
   find "${DOTFILES_PATH}" -name '.*' -not -name '.git' -not -name '.gitmodules' -mindepth 1 -maxdepth 1 \
     | xargs basename \
+    | xargs -I {} git ls-tree --name-only HEAD {} \
     | xargs -n 1 find "${HOME}" -maxdepth 1 -not -type l -name \
     | xargs -I {} mv -v {} "{}.${BACKUP_DATE}"
   find "${DOTFILES_PATH}" -name '.*' -not -name '.git' -not -name '.gitmodules' -mindepth 1 -maxdepth 1 \
-    | xargs -I {} ln -fnsv {} "${HOME}"
+    | xargs basename \
+    | xargs -I {} git ls-tree --name-only HEAD {} \
+    | xargs -I {} ln -fnsv "${DOTFILES_PATH}/{}" "${HOME}"
   source "${HOME}/.bash_profile"
   vim +PluginInstall +qall
 }
