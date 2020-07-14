@@ -17,7 +17,7 @@ do_it() {
     -not -name '.gitmodules' \
     -mindepth 1 -maxdepth 1 \
     | xargs basename \
-    | xargs -I {} git ls-tree --name-only HEAD {} \
+    | xargs -I {} git -C "${DOTFILES_PATH}" ls-tree --name-only HEAD {} \
     | xargs -n 1 find "${HOME}" -maxdepth 1 -not -type l -name \
     | xargs -I {} mv -v {} "{}.${BACKUP_DATE}"
   find "${DOTFILES_PATH}" -name '.*' \
