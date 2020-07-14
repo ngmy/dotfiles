@@ -12,10 +12,12 @@ do_it() {
     git -C "${DOTFILES_PATH}" submodule update
   fi
   BACKUP_DATE="$(date +%Y%m%d_%H%M%S)"
-  find "${DOTFILES_PATH}" -name '.*' -not -name '.git' -mindepth 1 -maxdepth 1 -exec basename {} \; \
+  find "${DOTFILES_PATH}" -name '.*' -not -name '.git' -mindepth 1 -maxdepth 1 \
+    | xargs basename \
     | xargs -n 1 find "${HOME}" -maxdepth 1 -not -type l -name \
     | xargs -I {} mv -v {} "{}.${BACKUP_DATE}"
-  find "${DOTFILES_PATH}" -name '.*' -not -name '.git' -mindepth 1 -maxdepth 1 -exec ln -fnsv {} "${HOME}" \;
+  find "${DOTFILES_PATH}" -name '.*' -not -name '.git' -mindepth 1 -maxdepth 1 \
+    | xargs -I {} ln -fnsv {} "${HOME}"
   vim +PluginInstall +qall
 }
 
