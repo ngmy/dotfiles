@@ -20,18 +20,20 @@ do_it() {
     git -C "${DOTFILES_PATH}" submodule update
   fi
   BACKUP_DATE="$(date +%Y%m%d_%H%M%S)"
-  find "${DOTFILES_PATH}" -name '.*' \
+  find "${DOTFILES_PATH}" \
+    -mindepth 1 -maxdepth 1 \
+    -name '.*' \
     -not -name '.git' \
     -not -name '.gitmodules' \
-    -mindepth 1 -maxdepth 1 \
     | xargs basename \
     | xargs -I {} git -C "${DOTFILES_PATH}" ls-tree --name-only HEAD {} \
-    | xargs -n 1 find "${HOME}" -maxdepth 1 -not -type l -name \
+    | xargs -I {} find "${HOME}" -maxdepth 1 -name {} -not -type l \
     | xargs -I {} mv -v {} "{}.${BACKUP_DATE}"
-  find "${DOTFILES_PATH}" -name '.*' \
+  find "${DOTFILES_PATH}" \
+    -mindepth 1 -maxdepth 1 \
+    -name '.*' \
     -not -name '.git' \
     -not -name '.gitmodules' \
-    -mindepth 1 -maxdepth 1 \
     | xargs basename \
     | xargs -I {} git ls-tree --name-only HEAD {} \
     | xargs -I {} ln -fnsv "${DOTFILES_PATH}/{}" "${HOME}"
