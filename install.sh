@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES_PATH="${1:-"${HOME}/dotfiles"}"
+DOTFILES_PATH="$(realpath ${1:-"${HOME}/dotfiles"})"
 
 do_it() {
   if [ -d "${DOTFILES_PATH}" ]; then
