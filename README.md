@@ -3,5 +3,5 @@
 ## Installation
 
 ```bash
-curl -LSs https://raw.githubusercontent.com/ngmy/dotfiles/master/install.sh | bash
+bash <(curl -LSs https://raw.githubusercontent.com/ngmy/dotfiles/master/install.sh)
 ```
