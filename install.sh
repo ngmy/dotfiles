@@ -4,7 +4,15 @@ DOTFILES_PATH="$(realpath "${1:-"${HOME}/dotfiles"}")"
 
 do_it() {
   if [ -d "${DOTFILES_PATH}" ]; then
-    echo "ngmy/dotfiles already exists in '${DOTFILES_PATH}'. Skip download."
+    echo "ngmy/dotfiles already exists in '${DOTFILES_PATH}'"
+    read -p 'Do you want to re-download ngmy/dotfiles and continue the installation? (y/N)' YN
+    if [ "${YN}" != 'y' ]; then
+      echo 'The installation was canceled.'
+      exit 1
+    fi
+    echo "Downloading ngmy/dotfiles to '${DOTFILES_PATH}'..."
+    git -C "${DOTFILES_PATH}" pull origin master
+    git -C "${DOTFILES_PATH}" submodule update
   else
     echo "Downloading ngmy/dotfiles to '${DOTFILES_PATH}'..."
     git clone https://github.com/ngmy/dotfiles.git "${DOTFILES_PATH}"
