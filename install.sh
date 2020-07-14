@@ -25,7 +25,7 @@ do_it() {
     -name '.*' \
     -not -name '.git' \
     -not -name '.gitmodules' \
-    | xargs basename \
+    | xargs -I {} basename {} \
     | xargs -I {} git -C "${DOTFILES_PATH}" ls-tree --name-only HEAD {} \
     | xargs -I {} find "${HOME}" -maxdepth 1 -name {} -not -type l \
     | xargs -I {} mv -v {} "{}.${BACKUP_DATE}"
@@ -34,7 +34,7 @@ do_it() {
     -name '.*' \
     -not -name '.git' \
     -not -name '.gitmodules' \
-    | xargs basename \
+    | xargs -I {} basename {} \
     | xargs -I {} git ls-tree --name-only HEAD {} \
     | xargs -I {} ln -fnsv "${DOTFILES_PATH}/{}" "${HOME}"
   source "${HOME}/.bash_profile"
