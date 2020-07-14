@@ -18,6 +18,7 @@ do_it() {
     | xargs -I {} mv -v {} "{}.${BACKUP_DATE}"
   find "${DOTFILES_PATH}" -name '.*' -not -name '.git' -not -name '.gitmodules' -mindepth 1 -maxdepth 1 \
     | xargs -I {} ln -fnsv {} "${HOME}"
+  source "${HOME}/.bash_profile"
   vim +PluginInstall +qall
 }
 
