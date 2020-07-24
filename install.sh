@@ -36,7 +36,7 @@ do_it() {
     -not -name '.gitmodules' \
     | xargs -I {} basename {} \
     | xargs -I {} git -C "${DOTFILES_PATH}" ls-tree --name-only HEAD {} \
-    | xargs -I {} ln -fnsv "${DOTFILES_PATH}/{}" "${HOME}"
+    | xargs -I {} ln -fnsv "${DOTFILES_PATH}/{}" "${HOME}/{}"
   source "${HOME}/.bash_profile"
   vim +PluginInstall +qall
 }
