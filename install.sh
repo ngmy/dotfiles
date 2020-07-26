@@ -1,10 +1,9 @@
 #!/bin/bash
 
-DOTFILES_PATH="$(realpath "${1:-"${HOME}/dotfiles"}")"
-
-do_it() {
+download() {
   if [ -d "${DOTFILES_PATH}" ]; then
     echo "ngmy/dotfiles already exists in '${DOTFILES_PATH}'"
+    local YN
     read -p 'Do you want to re-download ngmy/dotfiles and continue the installation? (y/N)' YN
     if [ "${YN}" != 'y' ]; then
       echo 'The installation was canceled.'
@@ -19,7 +18,10 @@ do_it() {
     git -C "${DOTFILES_PATH}" submodule init
     git -C "${DOTFILES_PATH}" submodule update
   fi
-  BACKUP_DATE="$(date +%Y%m%d_%H%M%S)"
+}
+
+backup() {
+  local BACKUP_DATE="$(date +%Y%m%d_%H%M%S)"
   find "${DOTFILES_PATH}" \
     -mindepth 1 -maxdepth 1 \
     -name '.*' \
@@ -29,6 +31,9 @@ do_it() {
     | xargs -I {} git -C "${DOTFILES_PATH}" ls-tree --name-only HEAD {} \
     | xargs -I {} find "${HOME}" -maxdepth 1 -name {} -not -type l \
     | xargs -I {} mv -v {} "{}.${BACKUP_DATE}"
+}
+
+install() {
   find "${DOTFILES_PATH}" \
     -mindepth 1 -maxdepth 1 \
     -name '.*' \
@@ -38,7 +43,19 @@ do_it() {
     | xargs -I {} git -C "${DOTFILES_PATH}" ls-tree --name-only HEAD {} \
     | xargs -I {} ln -fnsv "${DOTFILES_PATH}/{}" "${HOME}/{}"
   source "${HOME}/.bash_profile"
+}
+
+install_vim_plugins() {
   vim +PluginInstall +qall
 }
 
-do_it
+main() {
+  local DOTFILES_PATH="$(realpath "${1:-"${HOME}/dotfiles"}")"
+
+  download
+  backup
+  install
+  install_vim_plugins
+}
+
+main $1
