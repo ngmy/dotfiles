@@ -1,4 +1,5 @@
 #!/bin/bash
+set -Ceuo pipefail
 
 download() {
   if [ -d "${DOTFILES_PATH}" ]; then
