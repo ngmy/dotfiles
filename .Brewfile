@@ -1,3 +1,5 @@
 tap "homebrew/bundle"
 tap "homebrew/core"
+tap "linuxbrew/xorg"
 brew "gcc"
+brew "git-credential-manager"
