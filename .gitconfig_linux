@@ -1,0 +1,2 @@
+[credential]
+	helper = !~/.linuxbrew/Cellar/openjdk/14.0.1/libexec/bin/java -Ddebug=false -Djava.net.useSystemProxies=true -jar ~/.linuxbrew/Cellar/git-credential-manager/2.0.4_1/libexec/git-credential-manager-2.0.4.jar

@@ -1,6 +1,14 @@
 #!/bin/bash
 set -Ceuo pipefail
 
+is_mac() {
+  [ "$(uname)" == 'Darwin' ]
+}
+
+is_linux() {
+  [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]
+}
+
 download() {
   if [ -d "${DOTFILES_PATH}" ]; then
     echo "ngmy/dotfiles already exists in '${DOTFILES_PATH}'"
@@ -27,6 +35,8 @@ backup() {
     -mindepth 1 -maxdepth 1 \
     -name '.*' \
     -not -name '.git' \
+    -not -name '.gitconfig_linux' \
+    -not -name '.gitconfig_mac' \
     -not -name '.gitmodules' \
     | xargs -I {} basename {} \
     | xargs -I {} git -C "${DOTFILES_PATH}" ls-tree --name-only HEAD {} \
@@ -39,10 +49,18 @@ install() {
     -mindepth 1 -maxdepth 1 \
     -name '.*' \
     -not -name '.git' \
+    -not -name '.gitconfig_linux' \
+    -not -name '.gitconfig_mac' \
     -not -name '.gitmodules' \
     | xargs -I {} basename {} \
     | xargs -I {} git -C "${DOTFILES_PATH}" ls-tree --name-only HEAD {} \
     | xargs -I {} ln -fnsv "${DOTFILES_PATH}/{}" "${HOME}/{}"
+  if is_linux; then
+    ln -fnsv "${DOTFILES_PATH}/.gitconfig_linux" "${HOME}/.gitconfig_os"
+  fi
+  if is_mac; then
+    ln -fnsv "${DOTFILES_PATH}/.gitconfig_mac" "${HOME}/.gitconfig_os"
+  fi
   source "${HOME}/.bash_profile"
 }
 

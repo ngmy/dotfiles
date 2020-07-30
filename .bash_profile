@@ -35,3 +35,12 @@ export PATH=$PATH:$HOME/bin
 
 # Bison for phpenv PHP 7.2.12 install
 #export PATH="/usr/local/opt/bison/bin:$PATH"
+
+# Homebrew
+if [ -d $HOME/.homebrew ]; then
+  # Mac
+  eval $($HOME/.homebrew/bin/brew shellenv)
+elif [ -d $HOME/.linuxbrew ]; then
+  # Linux
+  eval $($HOME/.linuxbrew/bin/brew shellenv)
+fi

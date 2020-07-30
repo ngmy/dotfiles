@@ -16,3 +16,7 @@
 	tool = vimdiff
 [mergetool]
 	prompt = false
+[credential]
+	canFallBackToInsecureStore = true
+[include]
+	path = ~/.gitconfig_os
