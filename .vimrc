@@ -187,15 +187,15 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " Use the brew python install
 let s:python_path = system('/usr/local/bin/python -', 'import sys;sys.stdout.write(",".join(sys.path))')
 
-python <<EOM
-import sys
-import vim
-
-python_paths = vim.eval('s:python_path').split(',')
-for path in python_paths:
-    if not path in sys.path:
-        sys.path.insert(0, path)
-EOM
+"python <<EOM
+"import sys
+"import vim
+"
+"python_paths = vim.eval('s:python_path').split(',')
+"for path in python_paths:
+"    if not path in sys.path:
+"        sys.path.insert(0, path)
+"EOM
 
 " options
 let g:vdebug_options = {
