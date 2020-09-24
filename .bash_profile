@@ -36,7 +36,8 @@ export PATH=$PATH:$HOME/bin
 # Bison for phpenv PHP 7.2.12 install
 #export PATH="/usr/local/opt/bison/bin:$PATH"
 
-if [ "`ps -eo pid,lstart,cmd | grep systemd | grep -v -e grep -e systemd- | sort -n -k2 | awk 'NR==1 { print $1 }'`" != "1" ]; then
+# genie
+if [ type genie > /dev/null 2>&1 && "`ps -eo pid,lstart,cmd | grep systemd | grep -v -e grep -e systemd- | sort -n -k2 | awk 'NR==1 { print $1 }'`" != "1" ]; then
   genie -s
 fi
 
