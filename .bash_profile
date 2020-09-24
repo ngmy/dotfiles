@@ -37,7 +37,7 @@ export PATH=$PATH:$HOME/bin
 #export PATH="/usr/local/opt/bison/bin:$PATH"
 
 # genie
-if [ type genie > /dev/null 2>&1 && "`ps -eo pid,lstart,cmd | grep systemd | grep -v -e grep -e systemd- | sort -n -k2 | awk 'NR==1 { print $1 }'`" != "1" ]; then
+if [ -x "$(type -p genie)" -a "$(ps -eo pid,lstart,cmd | grep systemd | grep -v -e grep -e systemd- | sort -n -k2 | awk 'NR==1 { print $1 }')" != "1" ]; then
   genie -s
 fi
 
