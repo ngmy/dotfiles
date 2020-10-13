@@ -146,3 +146,5 @@ fi
 # Google Cloud SDK
 #source /Users/nagamiya/usr/local/src/google-cloud-sdk/completion.bash.inc
 #source /Users/nagamiya/usr/local/src/google-cloud-sdk/path.bash.inc
+
+alias tree='tree --charset=C -N'
