@@ -52,3 +52,9 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 if type 'direnv' > /dev/null 2>&1; then
   eval "$(direnv hook bash)"
 fi
+
+# cron
+if ! service cron status > /dev/null 2>&1; then
+  echo 'Starting cron service...'
+  sudo service cron start > /dev/null 2>&1
+fi
