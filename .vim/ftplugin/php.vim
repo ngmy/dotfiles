@@ -56,5 +56,5 @@ let g:ref_phpmanual_path = $HOME.'/.vim/ref/php-chunked-xhtml'
 
 " phpfolding {{{
 let g:DisableAutoPHPFolding = 0
-source $HOME/.vim/bundle/phpfolding.vim/plugin/phpfolding.vim
+source $HOME/.vim/plugged/phpfolding.vim/plugin/phpfolding.vim
 " }}}

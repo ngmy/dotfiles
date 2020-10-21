@@ -65,7 +65,8 @@ install() {
 }
 
 install_vim_plugins() {
-  vim +PluginInstall +qall
+  vim +PlugInstall +qall
+  vim +CocInstall coc-phpls +qall
 }
 
 main() {

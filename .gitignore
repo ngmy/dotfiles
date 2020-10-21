@@ -12,9 +12,9 @@
 # Vim history files
 .netrwhist
 
-# Vim plugins
-.vim/bundle/*
-!.vim/bundle/Vundle.vim
+# Vim plugin manager and Vim plugins
+.vim/autoload/plug.vim
+.vim/plugged
 
 # Emacs backup files
 *~
