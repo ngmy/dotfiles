@@ -148,3 +148,5 @@ fi
 #source /Users/nagamiya/usr/local/src/google-cloud-sdk/path.bash.inc
 
 alias tree='tree --charset=C -N'
+
+export EDITOR=vi
