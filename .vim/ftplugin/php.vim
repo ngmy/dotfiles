@@ -24,17 +24,6 @@ let g:pdv_cfg_Copyright = ''
 let g:pdv_cfg_License = ''
 " }}}
 
-" Flymake {{{
-setlocal makeprg=$HOME/.vim/bin/vimparse.php\ -c\ %\ $*
-augroup php_vimparse
-  autocmd!
-  autocmd php_vimparse BufWritePost *.php silent make
-  autocmd php_vimparse QuickfixCmdPost make redraw!
-  autocmd php_vimparse QuickfixCmdPost make if len(getqflist()) != 0 | copen | endif
-  autocmd php_vimparse QuickfixCmdPost make if len(getqflist()) == 0 | cclose | endif
-augroup END
-" }}}
-
 " phpcomplete-extended {{{
 " Composer command name.
 let g:phpcomplete_index_composer_command = 'composer'
