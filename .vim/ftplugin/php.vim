@@ -39,10 +39,6 @@ set omnifunc=syntaxcomplete#Complete
 set tags+=php.tags
 " }}}
 
-" vim-ref {{{
-let g:ref_phpmanual_path = $HOME.'/.vim/ref/php-chunked-xhtml'
-" }}}
-
 " phpfolding {{{
 let g:DisableAutoPHPFolding = 0
 source $HOME/.vim/plugged/phpfolding.vim/plugin/phpfolding.vim
