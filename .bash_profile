@@ -47,3 +47,8 @@ fi
 
 # nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# direnv
+if type 'direnv' > /dev/null 2>&1; then
+  eval "$(direnv hook bash)"
+fi
