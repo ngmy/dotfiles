@@ -44,3 +44,6 @@ elif [ -d $HOME/.linuxbrew ]; then
   # Linux
   eval $($HOME/.linuxbrew/bin/brew shellenv)
 fi
+
+# nodebrew
+export PATH=$HOME/.nodebrew/current/bin:$PATH
