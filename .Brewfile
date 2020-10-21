@@ -1,6 +1,7 @@
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "linuxbrew/xorg"
+brew "figlet"
 brew "gcc"
 brew "git-credential-manager"
 brew "nodebrew"
