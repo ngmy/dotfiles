@@ -228,6 +228,7 @@ set completeopt=menuone
 
 " Cursor in terminal
 "
+" https://github.com/microsoft/terminal/issues/4335
 " https://vim.fandom.com/wiki/Configuring_the_cursor
 "
 " 1 or 0 -> Blinking block
