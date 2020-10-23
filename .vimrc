@@ -225,6 +225,35 @@ set laststatus=2
 
 " Disable omnifunc preview window
 set completeopt=menuone
+
+" Cursor in terminal
+"
+" https://vim.fandom.com/wiki/Configuring_the_cursor
+"
+" 1 or 0 -> Blinking block
+" 2 -> Solid block
+" 3 -> Blinking underscore
+" 4 -> Solid underscore
+"
+" Recent versions of xterm (282 or above) also support:
+"
+" 5 -> Blinking vertical bar
+" 6 -> Solid vertical bar
+if &term =~ '^xterm'
+  " Enter Vim
+  autocmd VimEnter * silent !echo -en "\e[0 q"
+  " HACK: Work around the problem that an escape sequence is output at startup.
+  "       https://vi.stackexchange.com/questions/19748
+  autocmd VimEnter * normal :startinsert
+  " Normal mode
+  let &t_EI .= "\e[0 q"
+  " Insert mode
+  let &t_SI .= "\e[6 q"
+  " Leave Vim
+  autocmd VimLeave * silent !echo -en "\e[5 q"
+  " Suspend and resume Vim
+  nnoremap <silent> <C-z> :execute 'silent !echo -en "\e[5 q"'<CR>:suspend<Bar>:execute 'silent !echo -en "\e[0 q"'<CR>
+endif
 " }}}
 
 " Text editing defualts {{{
