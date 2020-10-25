@@ -116,37 +116,17 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#alias lenet-update="ask_password && curl -F 'migrate=true' lenet-deploy.elasticbeanstalk.com/release"
-#alias ls='ls -G'
-#alias cp='gcp'
+export EDITOR=vim
 
-# TODO pythonzはもう使わないので後で消す
-# # pythonz
-# [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
-
-# brew vim
-#alias vi='/usr/local/bin/vim'
-#alias vim='/usr/local/bin/vim'
-
-# Enable git completion in prompt
-#source /usr/local/etc/bash_completion.d/git-prompt.sh
-#source /usr/local/etc/bash_completion.d/git-completion.bash
-# Display git branch name in prompt
-#GIT_PS1_SHOWDIRTYSTATE=true
-#export PS1='\h\[\033[00m\]:\W\[\033[31m\]$(__git_ps1 [%s])\[\033[00m\]\$ '
-
-# Hack cd to enable direnv/dep in symlink
-#cd() {
-#    builtin cd "$@"
-#    if [ "$1" = "$HOME/lenet" -o "$1" = "$HOME/lenet-api" ]; then
-#        cd $(realpath .)
-#    fi
-#}
-
-# Google Cloud SDK
-#source /Users/nagamiya/usr/local/src/google-cloud-sdk/completion.bash.inc
-#source /Users/nagamiya/usr/local/src/google-cloud-sdk/path.bash.inc
-
-alias tree='tree --charset=C -N'
-
-export EDITOR=vi
+if type __git_ps1 > /dev/null 2>&1; then
+  GIT_PS1_SHOWDIRTYSTATE=true
+  GIT_PS1_SHOWSTASHSTATE=true
+  GIT_PS1_SHOWUNTRACKEDFILES=true
+  GIT_PS1_SHOWUPSTREAM='auto'
+  GIT_PS1_SHOWCOLORHINTS=true
+  PROMPT_COMMAND='\
+    __git_ps1 \
+    "\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]" \
+    "\$ " \
+    '
+fi
