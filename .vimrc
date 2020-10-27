@@ -2,19 +2,19 @@ set nocompatible
 
 " vim-plug {{{
 " Install vim-plug if not found
-if empty(glob($HOME.'/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob($HOME . '/.vim/autoload/plug.vim'))
+  silent !curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin($HOME.'/.vim/plugged')
+call plug#begin($HOME . '/.vim/plugged')
 
 Plug 'aklt/plantuml-syntax'
 Plug 'bpearson/vim-phpcs'
 Plug 'davidhalter/jedi-vim'
 "Plug 'fatih/vim-go'
-Plug 'file://'.$HOME.'/usr/local/src/ijaas'
+Plug 'file://' . $HOME . '/usr/local/src/ijaas'
 Plug 'gregsexton/gitv'
 "Plug 'hallettj/jslint.vim'
 "Plug 'jodosha/vim-godebug'
@@ -60,7 +60,7 @@ set shortmess+=c
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-if has("patch-8.1.1564")
+if has('patch-8.1.1564')
   " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
 else
@@ -108,7 +108,7 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
+  if (index(['vim', 'help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
     call CocActionAsync('doHover')
@@ -282,7 +282,7 @@ let g:debuggerPort=10000
 " }}}
 
 " plantuml {{{
-let g:plantuml_executable_script = $HOME.'/.vim/bin/plantuml'
+let g:plantuml_executable_script = $HOME . '/.vim/bin/plantuml'
 " }}}
 
 " vim-fugitive {{{
@@ -306,9 +306,9 @@ let s:python_path = system('/usr/local/bin/python -', 'import sys;sys.stdout.wri
 
 " options
 let g:vdebug_options = {
-\    "port" : 9000,
-\    "server" : '127.0.0.1',
-\    "path_maps" : { '/path/to/remote/project': $HOME.'/path/to/local/project' },
+\    'port' : 9000,
+\    'server' : '127.0.0.1',
+\    'path_maps' : { '/path/to/remote/project': $HOME . '/path/to/local/project' },
 \}
 " }}}
 
