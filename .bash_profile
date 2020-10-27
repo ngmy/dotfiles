@@ -1,60 +1,46 @@
-# direnv
-#export ANY_ENV_HOME=$HOME/.anyenv
-#export PATH=$PATH:$ANY_ENV_HOME/bin; eval "$(anyenv init -)";
-#eval $(direnv hook bash)
-
-# Load bashrc
-if [ -f $HOME/.bashrc ] ; then
-    . $HOME/.bashrc
+# include .bashrc if it exists
+if [ -f "${HOME}/.bashrc" ]; then
+  source "${HOME}/.bashrc"
 fi
 
-# Add custom bin
-export PATH=$PATH:$HOME/bin
+# set PATH so it includes user's private bin if it exists
+if [ -d "${HOME}/bin" ]; then
+  PATH="${PATH}:${HOME}/bin"
+fi
 
-# Change ls colors
-#export LSCOLORS=gxfxcxdxbxegedabagacad
+# set PATH so it includes user's private bin if it exists
+if [ -d "${HOME}/.local/bin" ]; then
+  PATH="${HOME}/.local/bin:${PATH}"
+fi
 
-# TODO pythonzはもう使わないので後で消す
-# # pythonz
-# # これがないとnpm installでエラーになる。
-# # 私が構築手順(https://whiteplus.esa.io/posts/1328)の理解を
-# # 間違えている可能性もある。
-# export PATH=/usr/local/bin:$PATH
-
-# goenv
-##export GOPATH=$HOME/workspace/lenet/lenet_api
-##export GOROOT=$HOME/.anyenv/envs/goenv/versions/`goenv version`
-#export GOPATH=$HOME/go
-#export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-##export GO_VERSION=1.7.5
-
-# Haskell
-#GHC_VERSION=ghc-8.0.2
-#GHC_PATH=$HOME/.stack/programs/x86_64-osx/$GHC_VERSION/bin
-#export PATH=$PATH:$HOME/.local/bin:$GHC_PATH
-
-# Bison for phpenv PHP 7.2.12 install
-#export PATH="/usr/local/opt/bison/bin:$PATH"
-
-# Homebrew
-if [ -d $HOME/.homebrew ]; then
+# set PATH so it includes Homebrew's bin if it exists
+if [ -d "${HOME}/.homebrew" ]; then
   # Mac
-  eval $($HOME/.homebrew/bin/brew shellenv)
-elif [ -d $HOME/.linuxbrew ]; then
+  eval "$("${HOME}/.homebrew/bin/brew" shellenv)"
+elif [ -d "${HOME}/.linuxbrew" ]; then
   # Linux
-  eval $($HOME/.linuxbrew/bin/brew shellenv)
+  eval "$("${HOME}/.linuxbrew/bin/brew" shellenv)"
 fi
 
-# nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-
-# direnv
-if type 'direnv' > /dev/null 2>&1; then
-  eval "$(direnv hook bash)"
+# set PATH so it includes nodebrew's bin if it exists
+if [ -d "${HOME}/.nodebrew/current/bin" ]; then
+  PATH="${HOME}/.nodebrew/current/bin:${PATH}"
 fi
 
-# cron
-if ! service cron status > /dev/null 2>&1; then
-  echo 'Starting cron service...'
-  sudo service cron start > /dev/null 2>&1
-fi
+# start services if they are not started
+SERVICES=(
+  cron
+)
+for service in "${SERVICES[@]}"; do
+  if ! service "${service}" status > /dev/null 2>&1; then
+    echo "Firing up ${service} daemon..." >&2
+    sudo service "${service}" start > /dev/null 2>&1
+    if service "${service}" status > /dev/null 2>&1; then
+      echo "${service} now running." >&2
+    else
+      echo "${service} failed to start!" >&2
+    fi
+  else
+    echo "${service} already running." >&2
+  fi
+done
