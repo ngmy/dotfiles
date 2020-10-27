@@ -241,18 +241,22 @@ set completeopt=menuone
 " 5 -> Blinking vertical bar
 " 6 -> Solid vertical bar
 if &term =~ '^xterm'
-  " Enter Vim
+  " When enter Vim (IOW, when enter normal mode)
   autocmd VimEnter * silent !echo -en "\e[0 q"
   " HACK: Work around the problem that an escape sequence is output at startup.
   "       https://vi.stackexchange.com/questions/19748
   autocmd VimEnter * normal :startinsert
-  " Normal mode
-  let &t_EI .= "\e[0 q"
-  " Insert mode
-  let &t_SI .= "\e[6 q"
-  " Leave Vim
+  " When enter insert mode
+  autocmd InsertEnter * silent !echo -en "\e[5 q"
+  " When leave insert mode (IOW, when enter normal mode)
+  autocmd InsertLeave * silent !echo -en "\e[0 q"
+  " When enter command line
+  autocmd CmdlineEnter * silent !echo -en "\e[5 q"
+  " When leave command line (IOW, when enter normal mode)
+  autocmd CmdlineLeave * silent !echo -en "\e[0 q"
+  " When leave Vim
   autocmd VimLeave * silent !echo -en "\e[5 q"
-  " Suspend and resume Vim
+  " When suspend Vim, and when resume Vim (IOW, when enter normal mode)
   nnoremap <silent> <C-z> :execute 'silent !echo -en "\e[5 q"'<CR>:suspend<Bar>:execute 'silent !echo -en "\e[0 q"'<CR>
 endif
 " }}}
