@@ -1,8 +1,3 @@
-# include .bashrc if it exists
-if [ -f "${HOME}/.bashrc" ]; then
-  source "${HOME}/.bashrc"
-fi
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "${HOME}/bin" ]; then
   PATH="${PATH}:${HOME}/bin"
@@ -25,6 +20,11 @@ fi
 # set PATH so it includes nodebrew's bin if it exists
 if [ -d "${HOME}/.nodebrew/current/bin" ]; then
   PATH="${HOME}/.nodebrew/current/bin:${PATH}"
+fi
+
+# include .bashrc if it exists
+if [ -f "${HOME}/.bashrc" ]; then
+  source "${HOME}/.bashrc"
 fi
 
 # start services if they are not started

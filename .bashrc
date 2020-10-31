@@ -1,6 +1,6 @@
-# include Ubuntu default .bashrc if it exists
-if [ -f "${HOME}/.bashrc_ubuntu" ]; then
-  source "${HOME}/.bashrc_ubuntu"
+# include OS default .bashrc if it exists
+if [ -f "${HOME}/.bashrc_os" ]; then
+  source "${HOME}/.bashrc_os"
 fi
 
 # set EDITOR so it set the default text editor

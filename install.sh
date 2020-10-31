@@ -9,6 +9,10 @@ is_linux() {
   [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]
 }
 
+is_ubuntu() {
+  is_linux && grep '^NAME="Ubuntu' /etc/os-release >/dev/null 2>&1
+}
+
 download() {
   if [ -d "${DOTFILES_PATH}" ]; then
     echo "ngmy/dotfiles already exists in '${DOTFILES_PATH}'"
@@ -34,6 +38,7 @@ backup() {
   find "${DOTFILES_PATH}" \
     -mindepth 1 -maxdepth 1 \
     -name '.*' \
+    -not -name '.bashrc_ubuntu' \
     -not -name '.git' \
     -not -name '.gitconfig_linux' \
     -not -name '.gitconfig_mac' \
@@ -48,6 +53,7 @@ install() {
   find "${DOTFILES_PATH}" \
     -mindepth 1 -maxdepth 1 \
     -name '.*' \
+    -not -name '.bashrc_ubuntu' \
     -not -name '.git' \
     -not -name '.gitconfig_linux' \
     -not -name '.gitconfig_mac' \
@@ -55,6 +61,9 @@ install() {
     | xargs -I {} basename {} \
     | xargs -I {} git -C "${DOTFILES_PATH}" ls-tree --name-only HEAD {} \
     | xargs -I {} ln -fnsv "${DOTFILES_PATH}/{}" "${HOME}/{}"
+  if is_ubuntu; then
+    ln -fnsv "${DOTFILES_PATH}/.bashrc_ubuntu" "${HOME}/.bashrc_os"
+  fi
   if is_linux; then
     ln -fnsv "${DOTFILES_PATH}/.gitconfig_linux" "${HOME}/.gitconfig_os"
   fi
