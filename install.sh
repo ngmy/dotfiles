@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -Ceuxo pipefail
 
 is_mac() {
@@ -87,4 +88,4 @@ main() {
   install_vim_plugins
 }
 
-main $1
+main "$@"
