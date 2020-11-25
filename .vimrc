@@ -231,7 +231,7 @@ set completeopt=menuone
 " https://github.com/microsoft/terminal/issues/4335
 " https://vim.fandom.com/wiki/Configuring_the_cursor
 "
-" 1 or 0 -> Blinking block
+" 1 -> Blinking block
 " 2 -> Solid block
 " 3 -> Blinking underscore
 " 4 -> Solid underscore
@@ -242,22 +242,22 @@ set completeopt=menuone
 " 6 -> Solid vertical bar
 if &term =~ '^xterm'
   " When enter Vim (IOW, when enter normal mode)
-  autocmd VimEnter * silent !echo -en "\e[0 q"
+  autocmd VimEnter * silent !echo -en "\e[1 q"
   " HACK: Work around the problem that an escape sequence is output at startup.
   "       https://vi.stackexchange.com/questions/19748
   autocmd VimEnter * normal :startinsert
   " When enter insert mode
   autocmd InsertEnter * silent !echo -en "\e[5 q"
   " When leave insert mode (IOW, when enter normal mode)
-  autocmd InsertLeave * silent !echo -en "\e[0 q"
+  autocmd InsertLeave * silent !echo -en "\e[1 q"
   " When enter command line
   autocmd CmdlineEnter * silent !echo -en "\e[5 q"
   " When leave command line (IOW, when enter normal mode)
-  autocmd CmdlineLeave * silent !echo -en "\e[0 q"
+  autocmd CmdlineLeave * silent !echo -en "\e[1 q"
   " When leave Vim
   autocmd VimLeave * silent !echo -en "\e[5 q"
   " When suspend Vim, and when resume Vim (IOW, when enter normal mode)
-  nnoremap <silent> <C-z> :execute 'silent !echo -en "\e[5 q"'<CR>:suspend<Bar>:execute 'silent !echo -en "\e[0 q"'<CR>
+  nnoremap <silent> <C-z> :execute 'silent !echo -en "\e[5 q"'<CR>:suspend<Bar>:execute 'silent !echo -en "\e[1 q"'<CR>
 endif
 " }}}
 
