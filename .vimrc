@@ -250,10 +250,10 @@ if &term =~ '^xterm'
   autocmd InsertEnter * silent !echo -en "\e[5 q"
   " When leave insert mode (IOW, when enter normal mode)
   autocmd InsertLeave * silent !echo -en "\e[1 q"
-  " When enter command line
-  autocmd CmdlineEnter * silent !echo -en "\e[5 q"
-  " When leave command line (IOW, when enter normal mode)
-  autocmd CmdlineLeave * silent !echo -en "\e[1 q"
+  " FIXME: When enter command line
+  "autocmd CmdlineEnter * silent !echo -en "\e[5 q"
+  " FIXME: When leave command line (IOW, when enter normal mode)
+  "autocmd CmdlineLeave * silent !echo -en "\e[1 q"
   " When leave Vim
   autocmd VimLeave * silent !echo -en "\e[5 q"
   " When suspend Vim, and when resume Vim (IOW, when enter normal mode)
