@@ -12,6 +12,7 @@ call plug#begin($HOME . '/.vim/plugged')
 
 Plug 'aklt/plantuml-syntax'
 Plug 'bpearson/vim-phpcs'
+Plug 'chr4/nginx.vim'
 Plug 'davidhalter/jedi-vim'
 "Plug 'fatih/vim-go'
 "Plug 'file://' . $HOME . '/usr/local/src/ijaas'
