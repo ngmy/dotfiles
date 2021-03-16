@@ -281,6 +281,10 @@ match ZenkakuSpace /　/
 set backspace=indent,eol,start
 " }}}
 
+" Set the filetype {{{
+autocmd BufNewFile,BufRead *.json.dist set filetype=json
+" }}}
+
 " Xdebug {{{
 " Listener port
 let g:debuggerPort=10000
