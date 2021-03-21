@@ -1,0 +1,48 @@
+{
+    "diagnostic-languageserver.linters": {
+        "ngmy.php-library.lint": {
+            "command": "docker",
+            "debounce": 100,
+            "rootPatterns": ["composer.json", "composer.lock", "vendor", ".git"],
+            "args": ["exec", "laradock-workspace_1", "composer", "lint", "--", "--report=emacs"],
+            "offsetLine": 0,
+            "offsetColumn": 0,
+            "sourceName": "phpcs",
+            "formatLines": 1,
+            "formatPattern": [
+                "(^.*):(\\d+):(\\d+):\\s+(.*)\\s+-\\s+(.*)(\\r|\\n)*$",
+                {
+                    "sourceName": 1,
+                    "sourceNameFilter": true,
+                    "line": 2,
+                    "column": 3,
+                    "message": 5,
+                    "security": 4
+                }
+            ],
+            "securities": {
+                "error": "error",
+                "warning": "warning"
+            }
+        },
+        "ngmy.php-library.findbugs": {
+            "command": "docker",
+            "debounce": 100,
+            "rootPatterns": ["composer.json", "composer.lock", "vendor", ".git"],
+            "args": ["exec", "laradock-workspace_1", "composer", "findbugs", "--", "--error-format", "raw", "--no-progress"],
+            "offsetLine": 0,
+            "offsetColumn": 0,
+            "sourceName": "phpstan",
+            "formatLines": 1,
+            "formatPattern": [
+                "^/var/www/([^:]+):(\\d+):(.*)(\\r|\\n)*$",
+                {
+                    "sourceName": 1,
+                    "sourceNameFilter": true,
+                    "line": 2,
+                    "message": 3
+                }
+            ]
+        }
+    }
+}
