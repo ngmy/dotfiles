@@ -76,7 +76,7 @@ install() {
 
 install_vim_plugins() {
   vim +PlugInstall +qall
-  vim '+CocInstall -sync coc-phpls' +qall
+  vim '+CocInstall -sync coc-phpls coc-diagnostic' +qall
 }
 
 main() {
