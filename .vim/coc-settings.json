@@ -1,6 +1,7 @@
 {
+    "diagnostic-languageserver.mergeConfig": true,
     "diagnostic-languageserver.linters": {
-        "ngmy.php-library.lint": {
+        "ngmy.laradock.composer.lint": {
             "command": "docker",
             "debounce": 100,
             "rootPatterns": ["composer.json", "composer.lock", "vendor", ".git"],
@@ -25,7 +26,7 @@
                 "warning": "warning"
             }
         },
-        "ngmy.php-library.findbugs": {
+        "ngmy.laradock.composer.findbugs": {
             "command": "docker",
             "debounce": 100,
             "rootPatterns": ["composer.json", "composer.lock", "vendor", ".git"],
@@ -44,5 +45,8 @@
                 }
             ]
         }
+    },
+    "diagnostic-languageserver.filetypes": {
+        "php": ["ngmy.laradock.composer.lint", "ngmy.laradock.composer.findbugs"]
     }
 }
