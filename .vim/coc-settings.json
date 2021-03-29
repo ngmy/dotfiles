@@ -1,11 +1,11 @@
 {
     "diagnostic-languageserver.mergeConfig": true,
     "diagnostic-languageserver.linters": {
-        "ngmy.laradock.composer.lint": {
+        "ngmy.laradock.phive.phpcs": {
             "command": "docker",
             "debounce": 100,
             "rootPatterns": ["composer.json", "composer.lock", "vendor", ".git"],
-            "args": ["exec", "-u", "laradock", "laradock-workspace_1", "composer", "lint", "--", "--report=emacs"],
+            "args": ["exec", "-u", "laradock", "laradock-workspace_1", "php", "tools/phpcs", "--report=emacs"],
             "offsetLine": 0,
             "offsetColumn": 0,
             "sourceName": "phpcs",
@@ -26,11 +26,11 @@
                 "warning": "warning"
             }
         },
-        "ngmy.laradock.composer.findbugs": {
+        "ngmy.laradock.phive.phpstan": {
             "command": "docker",
             "debounce": 100,
             "rootPatterns": ["composer.json", "composer.lock", "vendor", ".git"],
-            "args": ["exec", "-u", "laradock", "laradock-workspace_1", "composer", "findbugs", "--", "--error-format", "raw", "--no-progress"],
+            "args": ["exec", "-u", "laradock", "laradock-workspace_1", "php", "tools/phpstan", "analyse", "--error-format", "raw", "--no-progress"],
             "offsetLine": 0,
             "offsetColumn": 0,
             "sourceName": "phpstan",
@@ -44,9 +44,35 @@
                     "message": 3
                 }
             ]
+        },
+        "ngmy.laradock.phive.psalm": {
+            "command": "docker",
+            "debounce": 100,
+            "rootPatterns": ["composer.json", "composer.lock", "vendor", ".git"],
+            "args": ["exec", "-u", "laradock", "laradock-workspace_1", "php", "tools/psalm", "--output-format=emacs", "--no-progress", "--no-cache"],
+            "offsetLine": 0,
+            "offsetColumn": 0,
+            "sourceName": "psalm",
+            "formatLines": 1,
+            "formatPattern": [
+                "^/var/www/([^:]+):(\\d+):(\\d+):(.*)\\s-\\s(.*)(\\r|\\n)*$",
+                {
+                    "sourceName": 1,
+                    "sourceNameFilter": true,
+                    "line": 2,
+                    "column": 3,
+                    "message": 5,
+                    "security": 4
+                }
+            ],
+            "securities": {
+                "error": "error",
+                "warning": "warning"
+            },
+            "requiredFiles": ["psalm.xml", "psalm.xml.dist"]
         }
     },
     "diagnostic-languageserver.filetypes": {
-        "php": ["ngmy.laradock.composer.lint", "ngmy.laradock.composer.findbugs"]
+        "php": ["ngmy.laradock.phive.phpcs", "ngmy.laradock.phive.phpstan", "ngmy.laradock.phive.psalm"]
     }
 }
