@@ -4,6 +4,9 @@
 # Log files
 *.log
 
+# Runtime data
+*.pid
+
 # Vim backup files
 *~
 *.swp
