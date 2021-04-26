@@ -11,7 +11,7 @@ is_linux() {
 }
 
 is_ubuntu() {
-  is_linux && grep '^NAME="Ubuntu' /etc/os-release >/dev/null 2>&1
+  grep '^NAME="Ubuntu' /etc/os-release >/dev/null 2>&1
 }
 
 download() {
