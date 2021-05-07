@@ -28,10 +28,10 @@ if [ -f "${HOME}/.bashrc" ]; then
 fi
 
 # start services if they are not started
-SERVICES=(
+readonly services=(
   cron
 )
-for service in "${SERVICES[@]}"; do
+for service in "${services[@]}"; do
   if ! service "${service}" status > /dev/null 2>&1; then
     echo "Firing up ${service} daemon..." >&2
     sudo service "${service}" start > /dev/null 2>&1

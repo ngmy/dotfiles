@@ -15,28 +15,28 @@ is_ubuntu() {
 }
 
 download() {
-  if [ -d "${DOTFILES_PATH}" ]; then
-    echo "ngmy/dotfiles already exists in '${DOTFILES_PATH}'"
-    local YN
-    read -p 'Do you want to re-download ngmy/dotfiles and continue the installation? (y/N)' YN
-    if [ "${YN}" != 'y' ]; then
+  if [ -d "${dotfiles_path}" ]; then
+    echo "ngmy/dotfiles already exists in '${dotfiles_path}'"
+    local yn
+    read -p 'Do you want to re-download ngmy/dotfiles and continue the installation? (y/N)' yn
+    if [ "${yn}" != 'y' ]; then
       echo 'The installation was canceled.'
       exit 1
     fi
-    echo "Downloading ngmy/dotfiles to '${DOTFILES_PATH}'..."
-    git -C "${DOTFILES_PATH}" pull origin master
-    git -C "${DOTFILES_PATH}" submodule update
+    echo "Downloading ngmy/dotfiles to '${dotfiles_path}'..."
+    git -C "${dotfiles_path}" pull origin master
+    git -C "${dotfiles_path}" submodule update
   else
-    echo "Downloading ngmy/dotfiles to '${DOTFILES_PATH}'..."
-    git clone https://github.com/ngmy/dotfiles.git "${DOTFILES_PATH}"
-    git -C "${DOTFILES_PATH}" submodule init
-    git -C "${DOTFILES_PATH}" submodule update
+    echo "Downloading ngmy/dotfiles to '${dotfiles_path}'..."
+    git clone https://github.com/ngmy/dotfiles.git "${dotfiles_path}"
+    git -C "${dotfiles_path}" submodule init
+    git -C "${dotfiles_path}" submodule update
   fi
 }
 
 backup() {
-  local BACKUP_DATE="$(date +%Y%m%d_%H%M%S)"
-  find "${DOTFILES_PATH}" \
+  local -r backup_date="$(date +%Y%m%d_%H%M%S)"
+  find "${dotfiles_path}" \
     -mindepth 1 -maxdepth 1 \
     -name '.*' \
     -not -name '.bashrc_ubuntu' \
@@ -45,13 +45,13 @@ backup() {
     -not -name '.gitconfig_mac' \
     -not -name '.gitmodules' \
     | xargs -I {} basename {} \
-    | xargs -I {} git -C "${DOTFILES_PATH}" ls-tree --name-only HEAD {} \
+    | xargs -I {} git -C "${dotfiles_path}" ls-tree --name-only HEAD {} \
     | xargs -I {} find "${HOME}" -maxdepth 1 -name {} -not -type l \
-    | xargs -I {} mv -v {} "{}.${BACKUP_DATE}"
+    | xargs -I {} mv -v {} "{}.${backup_date}"
 }
 
 install() {
-  find "${DOTFILES_PATH}" \
+  find "${dotfiles_path}" \
     -mindepth 1 -maxdepth 1 \
     -name '.*' \
     -not -name '.bashrc_ubuntu' \
@@ -60,16 +60,16 @@ install() {
     -not -name '.gitconfig_mac' \
     -not -name '.gitmodules' \
     | xargs -I {} basename {} \
-    | xargs -I {} git -C "${DOTFILES_PATH}" ls-tree --name-only HEAD {} \
-    | xargs -I {} ln -fnsv "${DOTFILES_PATH}/{}" "${HOME}/{}"
+    | xargs -I {} git -C "${dotfiles_path}" ls-tree --name-only HEAD {} \
+    | xargs -I {} ln -fnsv "${dotfiles_path}/{}" "${HOME}/{}"
   if is_ubuntu; then
-    ln -fnsv "${DOTFILES_PATH}/.bashrc_ubuntu" "${HOME}/.bashrc_os"
+    ln -fnsv "${dotfiles_path}/.bashrc_ubuntu" "${HOME}/.bashrc_os"
   fi
   if is_linux; then
-    ln -fnsv "${DOTFILES_PATH}/.gitconfig_linux" "${HOME}/.gitconfig_os"
+    ln -fnsv "${dotfiles_path}/.gitconfig_linux" "${HOME}/.gitconfig_os"
   fi
   if is_mac; then
-    ln -fnsv "${DOTFILES_PATH}/.gitconfig_mac" "${HOME}/.gitconfig_os"
+    ln -fnsv "${dotfiles_path}/.gitconfig_mac" "${HOME}/.gitconfig_os"
   fi
   source "${HOME}/.bash_profile"
 }
@@ -80,7 +80,7 @@ install_vim_plugins() {
 }
 
 main() {
-  local DOTFILES_PATH="$(realpath "${1:-"${HOME}/dotfiles"}")"
+  local -r dotfiles_path="$(realpath "${1:-"${HOME}/dotfiles"}")"
 
   download
   backup
