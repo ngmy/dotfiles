@@ -5,20 +5,18 @@
             "command": "docker",
             "debounce": 100,
             "rootPatterns": ["composer.json", "composer.lock", "vendor", ".git"],
-            "args": ["exec", "-u", "laradock", "laradock-workspace_1", "php", "tools/phpcs", "--report=emacs"],
+            "args": ["exec", "-u", "laradock", "laradock-workspace_1", "php", "tools/phpcs", "--report=emacs", "%relativepath"],
             "offsetLine": 0,
             "offsetColumn": 0,
             "sourceName": "phpcs",
             "formatLines": 1,
             "formatPattern": [
-                "(^.*):(\\d+):(\\d+):\\s+(.*)\\s+-\\s+(.*)(\\r|\\n)*$",
+                "^.*:(\\d+):(\\d+):\\s+(.*)\\s+-\\s+(.*)(\\r|\\n)*$",
                 {
-                    "sourceName": 1,
-                    "sourceNameFilter": true,
-                    "line": 2,
-                    "column": 3,
-                    "message": 5,
-                    "security": 4
+                    "line": 1,
+                    "column": 2,
+                    "message": 4,
+                    "security": 3
                 }
             ],
             "securities": {
@@ -30,18 +28,16 @@
             "command": "docker",
             "debounce": 100,
             "rootPatterns": ["composer.json", "composer.lock", "vendor", ".git"],
-            "args": ["exec", "-u", "laradock", "laradock-workspace_1", "php", "tools/phpstan", "analyse", "--error-format", "raw", "--no-progress"],
+            "args": ["exec", "-u", "laradock", "laradock-workspace_1", "php", "tools/phpstan", "analyse", "--error-format", "raw", "--no-progress", "%relativepath"],
             "offsetLine": 0,
             "offsetColumn": 0,
             "sourceName": "phpstan",
             "formatLines": 1,
             "formatPattern": [
-                "^/var/www/([^:]+):(\\d+):(.*)(\\r|\\n)*$",
+                "^[^:]+:(\\d+):(.*)(\\r|\\n)*$",
                 {
-                    "sourceName": 1,
-                    "sourceNameFilter": true,
-                    "line": 2,
-                    "message": 3
+                    "line": 1,
+                    "message": 2
                 }
             ]
         },
@@ -49,20 +45,18 @@
             "command": "docker",
             "debounce": 100,
             "rootPatterns": ["composer.json", "composer.lock", "vendor", ".git"],
-            "args": ["exec", "-u", "laradock", "laradock-workspace_1", "php", "tools/psalm", "--output-format=emacs", "--no-progress", "--no-cache"],
+            "args": ["exec", "-u", "laradock", "laradock-workspace_1", "php", "tools/psalm", "--output-format=emacs", "--no-progress", "--no-cache", "%relativepath"],
             "offsetLine": 0,
             "offsetColumn": 0,
             "sourceName": "psalm",
             "formatLines": 1,
             "formatPattern": [
-                "^/var/www/([^:]+):(\\d+):(\\d+):(.*)\\s-\\s(.*)(\\r|\\n)*$",
+                "^[^:]+:(\\d+):(\\d+):(.*)\\s-\\s(.*)(\\r|\\n)*$",
                 {
-                    "sourceName": 1,
-                    "sourceNameFilter": true,
-                    "line": 2,
-                    "column": 3,
-                    "message": 5,
-                    "security": 4
+                    "line": 1,
+                    "column": 2,
+                    "message": 4,
+                    "security": 3
                 }
             ],
             "securities": {
