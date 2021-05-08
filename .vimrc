@@ -232,7 +232,7 @@ set hlsearch
 "set cursorline " If enabled, Vim slows down with long lines
 "set cursorcolumn "If enabled, Vim slows down with long lines
 
-" Highlighting more than specified characters
+" Display a vertical line in the specified column
 if exists('&colorcolumn')
   set colorcolumn=120
 endif
