@@ -22,6 +22,7 @@ Plug 'gregsexton/gitv'
 "Plug 'joonty/vdebug'
 "Plug 'm2mdas/phpcomplete-extended'
 "Plug 'm2mdas/phpcomplete-extended-laravel'
+Plug 'nelsyeung/twig.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'ngmy/vim-rubocop'
 Plug 'posva/vim-vue'
