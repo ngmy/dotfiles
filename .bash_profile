@@ -28,7 +28,7 @@ if [ -f "${HOME}/.bashrc" ]; then
 fi
 
 # start services if they are not started
-readonly services=(
+services=(
   cron
 )
 for service in "${services[@]}"; do
