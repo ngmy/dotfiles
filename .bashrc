@@ -21,7 +21,7 @@ if type __git_ps1 > /dev/null 2>&1; then
   GIT_PS1_SHOWCOLORHINTS='true'
   PROMPT_COMMAND="\
     __git_ps1 \
-    '\[\e]0;${WSL_DISTRO_NAME}: \u@\h: \w\a\]${debian_chroot:+(${debian_chroot})}\[\033[01;31m\]${WSL_DISTRO_NAME}\[\033[00m\]:\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]' \
+    '\[\e]0;${WSL_DISTRO_NAME}: \u@\h: \w\a\]${debian_chroot:+(${debian_chroot})}\[\033[01;33m\]${WSL_DISTRO_NAME}\[\033[00m\]:\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]' \
     '\\\$ ' \
     "
 fi
