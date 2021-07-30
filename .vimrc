@@ -360,4 +360,8 @@ augroup phpSyntaxOverride
 augroup END
 " }}}
 
+" coc-css {{{
+autocmd FileType scss setl iskeyword+=@-@
+" }}}
+
 " vim: set et ts=2 sts=2 sw=2 tw=0 fdm=marker fdc=3 :
