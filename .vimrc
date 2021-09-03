@@ -12,6 +12,7 @@ call plug#begin($HOME . '/.vim/plugged')
 
 Plug 'aklt/plantuml-syntax'
 Plug 'bpearson/vim-phpcs'
+Plug 'cespare/vim-toml'
 Plug 'chr4/nginx.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'evidens/vim-twig'
