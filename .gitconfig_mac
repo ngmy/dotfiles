@@ -1,2 +1,3 @@
 [credential]
-	helper = !java -Ddebug=false -Djava.net.useSystemProxies=true -jar ~/.homebrew/Cellar/git-credential-manager/2.0.4_2/libexec/git-credential-manager-2.0.4.jar
+	helper = /usr/bin/git-credential-manager-core
+	credentialStore = plaintext
