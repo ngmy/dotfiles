@@ -35,3 +35,6 @@ nohup.out
 
 # Zephir directories
 .zephir
+
+# direnv
+.envrc
