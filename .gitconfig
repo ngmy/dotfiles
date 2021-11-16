@@ -20,3 +20,5 @@
 	useHttpPath = true
 [include]
 	path = ~/.gitconfig_os
+[credential]
+	gitHubHelper = 
