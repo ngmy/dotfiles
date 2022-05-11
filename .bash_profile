@@ -44,3 +44,11 @@ for service in "${services[@]}"; do
     echo "${service} already running." >&2
   fi
 done
+
+# set MTU to the value of the Cloudflare WARP
+if ! ip link show eth0 | grep -q 1360; then
+  sudo ip link set eth0 mtu 1360
+  echo 'set MTU to the value of the Cloudflare WARP.'
+else
+  echo 'MTU already set to the value of the Cloudflare WARP.'
+fi
