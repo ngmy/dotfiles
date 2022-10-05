@@ -301,6 +301,7 @@ set backspace=indent,eol,start
 
 " Set the filetype {{{
 autocmd BufNewFile,BufRead *.json.dist set filetype=json
+autocmd BufNewFile,BufRead *.ts,*.tsx set filetype=javascript
 " }}}
 
 " Xdebug {{{
