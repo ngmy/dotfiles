@@ -77,6 +77,7 @@ install() {
 install_vim_plugins() {
   vim +PlugInstall +qall
   vim '+CocInstall -sync coc-phpls coc-diagnostic coc-tsserver coc-html coc-css' +qall
+  vim '+Copilot setup' +qall
 }
 
 main() {
