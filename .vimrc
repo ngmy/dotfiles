@@ -44,7 +44,7 @@ Plug 'xwsoul/vim-zephir'
 call plug#end()
 " }}}
 
-" coc.nvim {{{
+" coc.nvim recommended configuration {{{
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
 " utf-8 byte sequence
 set encoding=utf-8
@@ -205,6 +205,10 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" }}}
+
+" coc.nvim {{{
+hi CocFloating ctermbg=237 guibg=#13354A
 " }}}
 
 " Editor {{{
