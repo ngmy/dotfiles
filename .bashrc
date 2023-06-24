@@ -3,6 +3,9 @@ if [ -f "${HOME}/.bashrc_os" ]; then
   source "${HOME}/.bashrc_os"
 fi
 
+# set time zone
+export TZ='Asia/Tokyo'
+
 # set EDITOR so it set the default text editor
 export EDITOR='vim'
 
