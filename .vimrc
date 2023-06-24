@@ -208,7 +208,16 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " }}}
 
 " coc.nvim {{{
+" Change the floating window color
 hi CocFloating ctermbg=237 guibg=#13354A
+
+" Workaround for <tab> not working well with copilot.vim
+let g:copilot_no_tab_map = v:true
+inoremap <silent><expr> <TAB>
+  \ coc#pum#visible() ? coc#pum#next(1) :
+  \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
+  \ CheckBackSpace() ? "\<Tab>" :
+  \ coc#refresh()
 " }}}
 
 " Editor {{{
