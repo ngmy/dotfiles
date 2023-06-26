@@ -28,6 +28,7 @@ Plug 'gregsexton/gitv'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'ngmy/vim-rubocop'
 Plug 'posva/vim-vue'
+Plug 'rbtnn/vim-ambiwidth'
 "Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimproc.vim'
 "Plug 'soramugi/auto-ctags.vim'
@@ -290,11 +291,6 @@ endif
 " }}}
 
 " Text editing defualts {{{
-" Display multi-byte characters correctly
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif
-
 " Highlighting tabs and unwanted spaces
 set list
 set listchars=tab:>>,extends:<,trail:-
