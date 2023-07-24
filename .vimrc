@@ -372,4 +372,8 @@ augroup END
 autocmd FileType scss setl iskeyword+=@-@
 " }}}
 
+" PHP-Indenting-for-VIm {{{
+let g:PHP_noArrowMatching = 1
+" }}}
+
 " vim: set et ts=2 sts=2 sw=2 tw=0 fdm=marker fdc=3 :
