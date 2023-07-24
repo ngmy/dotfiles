@@ -10,6 +10,7 @@ endif
 
 call plug#begin($HOME . '/.vim/plugged')
 
+Plug '2072/PHP-Indenting-for-VIm'
 Plug 'aklt/plantuml-syntax'
 Plug 'bpearson/vim-phpcs'
 Plug 'cespare/vim-toml'
