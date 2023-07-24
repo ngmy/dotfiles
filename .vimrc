@@ -216,7 +216,7 @@ hi CocFloating ctermbg=237 guibg=#13354A
 let g:copilot_no_tab_map = v:true
 inoremap <silent><expr> <TAB>
   \ coc#pum#visible() ? coc#pum#next(1) :
-  \ exists('b:_copilot.suggestions') ? copilot#Accept("\<CR>") :
+  \ exists('b:_copilot.suggestions') && !empty(b:_copilot.suggestions) ? copilot#Accept("\<CR>") :
   \ CheckBackspace() ? "\<Tab>" :
   \ coc#refresh()
 " }}}
