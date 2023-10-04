@@ -15,6 +15,9 @@ if [ -d "${HOME}/.homebrew" ]; then
 elif [ -d "${HOME}/.linuxbrew" ]; then
   # Linux
   eval "$("${HOME}/.linuxbrew/bin/brew" shellenv)"
+elif [ -d "/home/linuxbrew/.linuxbrew" ]; then
+  # Linux (default prefix)
+  eval "$("/home/linuxbrew/.linuxbrew/bin/brew" shellenv)"
 fi
 
 # set PATH so it includes nodebrew's bin if it exists
