@@ -74,19 +74,12 @@ install() {
   source "${HOME}/.bash_profile"
 }
 
-install_vim_plugins() {
-  vim +PlugInstall +qall
-  vim '+CocInstall -sync coc-phpls coc-diagnostic coc-tsserver coc-html coc-css coc-vetur' +qall
-  vim '+Copilot setup' +qall
-}
-
 main() {
   local -r dotfiles_path="$(realpath "${1:-"${HOME}/dotfiles"}")"
 
   download
   backup
   install
-  install_vim_plugins
 }
 
 main "$@"
