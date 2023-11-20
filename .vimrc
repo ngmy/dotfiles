@@ -217,6 +217,12 @@ hi CocFloating ctermbg=237 guibg=#13354A
 " copilot.vim {{{
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
+
+let g:copilot_filetypes = {
+  \ 'gitcommit': v:true,
+  \ 'markdown': v:true,
+  \ 'yaml': v:true,
+  \ }
 " }}}
 
 " Editor {{{
