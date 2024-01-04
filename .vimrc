@@ -304,6 +304,9 @@ highlight SpecialKey ctermfg=lightblue ctermbg=blue guifg=lightblue guifg=blue
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue ctermbg=blue gui=underline guifg=blue guibg=blue
 match ZenkakuSpace /　/
 
+" Highlighting TODO, FIXME, etc. for all file types
+autocmd Syntax * call matchadd('Todo', '\W\zs\(TODO\|FIXME\|HACK\|XXX\|REVIEW\|OPTIMIZE\|CHANGED\|NOTE\|WARNING\)\ze\W')
+
 " Erasing previously entered characters in insert mode
 set backspace=indent,eol,start
 " }}}
