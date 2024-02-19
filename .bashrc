@@ -34,5 +34,8 @@ if type direnv > /dev/null 2>&1; then
   eval "$(direnv hook bash)"
 fi
 
+# set github cli completion
+eval "$(gh completion -s bash)"
+
 # set bash completion
 complete -o default chrome
