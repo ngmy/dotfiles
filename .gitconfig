@@ -4,8 +4,6 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore
-[init]
-	templatedir = ~/.git_template
 [alias]
 	tree = "log --graph --date=iso --pretty='[%ad]%C(auto) %h%d %Cgreen%an%Creset : %s'"
 [diff]

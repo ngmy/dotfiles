@@ -25,7 +25,10 @@
 .#*
 
 # Ctags tags files
+tags
 *.tags
+*.tags.lock
+!.tags
 
 # output from nohup
 nohup.out

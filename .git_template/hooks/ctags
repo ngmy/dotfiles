@@ -1,5 +1,0 @@
-#!/bin/bash
-
-rm *.tags
-ctags --tag-relative --recurse --sort=yes --append=no --languages=php -f php.tags
-gotags -R -sort . > go.tags
