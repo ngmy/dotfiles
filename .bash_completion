@@ -1,0 +1,17 @@
+source <(docker completion bash)
+
+_docker_compose_exec_local_file_completion() {
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+
+  if [[ "${COMP_CWORD}" -ge 4 && "${COMP_WORDS[1]}" == 'compose' && "${COMP_WORDS[2]}" == 'exec' ]]; then
+    compopt -o default
+  else
+    if [[ "$(type -t compopt)" = 'builtin' ]]; then
+        complete -o default -F __start_docker docker
+    else
+        complete -o default -o nospace -F __start_docker docker
+    fi
+  fi
+}
+
+complete -F _docker_compose_exec_local_file_completion docker
