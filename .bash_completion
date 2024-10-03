@@ -1,3 +1,9 @@
+docker -v > /dev/null
+
+if [ $? -ne 0 ]; then
+  return
+fi
+
 source <(docker completion bash)
 
 _docker_compose_exec_local_file_completion() {
