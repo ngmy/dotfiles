@@ -69,5 +69,5 @@
     "diagnostic-languageserver.filetypes": {
         "php": ["ngmy.laradock.phive.phpcs", "ngmy.laradock.phive.phpstan", "ngmy.laradock.phive.psalm"]
     },
-    "intelephense.environment.phpVersion": "8.1.0"
+    "intelephense.environment.phpVersion": "8.2.0"
 }
