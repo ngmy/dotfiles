@@ -226,6 +226,9 @@ let g:copilot_filetypes = {
 " }}}
 
 " Editor {{{
+" Use default colorscheme
+colorscheme default
+
 " Enable syntax highlighting
 syntax on
 
