@@ -39,3 +39,6 @@ eval "$(gh completion -s bash)"
 
 # set bash completion
 complete -o default chrome
+
+# set the default browser to chrome
+export BROWSER=chrome
