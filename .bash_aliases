@@ -2,4 +2,4 @@
 alias tree='tree --charset=C -N'
 
 # HACK: workaround for garbled japanese characters
-alias clip.exe='iconv -t sjis | clip.exe'
+alias clip.exe='{ printf "\xff\xfe"; iconv -t UTF-16LE; } | clip.exe'
